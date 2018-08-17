@@ -1,5 +1,5 @@
 var fullname = name+' '+surname;
-var email = name.toLowerCase()+surname.toLowerCase()+"@gmail.com";
+var email = name.toLowerCase()+surname.toLowerCase()+name.toLowerCase()+surname.toLowerCase()+"@gmail.com";
 var password = '12345aA';
 freeUrl = "https://www.udemy.com/complete-java-course-from-scratch/?couponCode=FREE_10";
 var review = "Very nice tutorials. Thanks!";
@@ -34,6 +34,7 @@ function checkAll(section){
 }  
 
 console.log("signup begin");
+
 function signUpWhole(){
   click('header-signup');
   setTimeout(function () {
@@ -44,9 +45,6 @@ function signUpWhole(){
         click('do-signup');
       }, 1000);
     }, 1000);
-
-
-  
 }
 signUpWhole();
 console.log("signup end");

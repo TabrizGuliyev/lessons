@@ -28,9 +28,22 @@
         }); 
     } 
 
-    function includeRedirect(){
-        console.log("click redirect");
+    function includeLogout(){
+        console.log("click logout");
         chrome.tabs.getSelected(null, function(tab){
+			var customCode = '';
+			customCode+='var urlRedirect = "https://www.udemy.com/user/logout";';
+        	chrome.tabs.executeScript(tab.id, {
+			    code: customCode
+			}, function() {
+			    chrome.tabs.executeScript(tab.id, {file: "scripts/redirect.js"});
+			});
+        });
+    }
+
+	function includeRedirect(){
+		console.log("click redirect");
+		chrome.tabs.getSelected(null, function(tab){
 			var couponCode = document.getElementById("couponCode").value;
 			console.log("couponCode="+couponCode);
 
@@ -39,15 +52,15 @@
 
 			var customCode = '';
 			customCode+='var urlRedirect = "https://www.udemy.com/'+courseName+'/?couponCode='+couponCode+'"';
-        	chrome.tabs.executeScript(tab.id, {
-			    code: customCode
+			chrome.tabs.executeScript(tab.id, {
+				code: customCode
 			}, function() {
-			    chrome.tabs.executeScript(tab.id, {file: "scripts/redirect.js"});
+				chrome.tabs.executeScript(tab.id, {file: "scripts/redirect.js"});
 			});
-            
-        }); 
-    } 
-  
+
+		});
+	}
+
     function includeBuy() {
         console.log("click buy");
         chrome.tabs.getSelected(null, function(tab){
@@ -157,6 +170,52 @@
         }); 
     } 
 
+    function signupWithoutReview(){
+
+        var enteredDelay = parseInt(document.getElementById("delay").value);
+        var delay = parseInt(enteredDelay);
+
+        clickOnButton("signup", 0);
+
+        clickOnButton("redirect", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("buy", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("content", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("fullprogress", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("gotoreview", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("5stars", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("checkall", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("review", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("finish", delay);
+        delay+=enteredDelay;
+
+        clickOnButton("logout", delay);
+	}
+
+
+	function clickOnButton(id, delay){
+        setTimeout(function () {
+					var lblProgress = document.getElementById("progress");
+					lblProgress.innerText = id;
+					var btn = document.getElementById(id);
+					btn.click();
+				}, delay);
+	}
 
     addListener("signup",includeSignup);
     addListener("buy",includeBuy);
@@ -167,5 +226,11 @@
 	addListener("5stars",include5stars);
 	addListener("review",includeReview);
 	addListener("checkall",includeCheckall);
-	addListener("finish",includeFinish); 
+	addListener("finish",includeFinish);
+	addListener("logout",includeLogout);
+	addListener("signupWR",signupWithoutReview);
+
+
+
+
 
