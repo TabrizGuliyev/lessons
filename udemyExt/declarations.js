@@ -205,8 +205,46 @@
         delay+=enteredDelay;
 
         clickOnButton("logout", delay);
+        return delay;
 	}
 
+	var fullnamesArr = null;
+	var index = 0;
+
+	function signupWithoutReviewMultiple(){
+			var fullnamesWhole = document.getElementById("fullnamesMultiple").value;
+			fullnamesArr = fullnamesWhole.split(";");
+			console.log(fullnamesArr);
+			if(fullnamesArr.length>0) {
+                signupWithoutReviewMultipleProcess();
+            }
+	}
+
+	function signupWithoutReviewMultipleProcess(){
+		var fullnameTemp = fullnamesArr[index];
+		if(fullnameTemp==null || !fullnameTemp || fullnameTemp.trim().length==0){
+            fullnamesArr = null;
+            index=0;
+            return;
+		}
+        var fullnameWhole = fullnameTemp.split(" ");
+        var name = fullnameWhole[0];
+        var surname = fullnameWhole[1];
+
+        document.getElementById("name").value = name;
+        document.getElementById("surname").value = surname;
+
+        var delay = signupWithoutReview()+3000;
+        index++;
+        if(index<fullnamesArr.length) {
+            setTimeout(function () {
+                signupWithoutReviewMultipleProcess();
+            }, delay);
+        }else{
+        	fullnamesArr = null;
+            index=0;
+		}
+	}
 
 	function clickOnButton(id, delay){
         setTimeout(function () {
@@ -229,6 +267,7 @@
 	addListener("finish",includeFinish);
 	addListener("logout",includeLogout);
 	addListener("signupWR",signupWithoutReview);
+	addListener("signupWRMultiple",signupWithoutReviewMultiple);
 
 
 
