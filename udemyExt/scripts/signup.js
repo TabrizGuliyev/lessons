@@ -41,6 +41,7 @@ function signUpWhole(){
       setInput(fullname,'fullname');
       setInput(email,'email');
       setInput(password,'password');
+      click('subscribe-to-emails');
       setTimeout(function () {
         click('do-signup');
       }, 1000);

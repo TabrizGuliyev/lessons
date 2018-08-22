@@ -222,6 +222,7 @@
 
 	function signupWithoutReviewMultipleProcess(){
 		var fullnameTemp = fullnamesArr[index];
+		console.log("fullnametemp="+fullnameTemp);
 		if(fullnameTemp==null || !fullnameTemp || fullnameTemp.trim().length==0){
             fullnamesArr = null;
             index=0;
@@ -230,7 +231,8 @@
         var fullnameWhole = fullnameTemp.split(" ");
         var name = fullnameWhole[0];
         var surname = fullnameWhole[1];
-
+		console.log("name="+name);
+		console.log("surname="+surname);
         document.getElementById("name").value = name;
         document.getElementById("surname").value = surname;
 
