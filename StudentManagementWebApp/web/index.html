@@ -1,22 +1,244 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Main Page | Student Management App</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="studentcore.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+              crossorigin="anonymous">
+
+        <script>
+            "use strict";
+            
+            var obj = {};
+            
+            console.log(obj.name);
+//            class Human{
+//                 constructor(name, surname, age) {
+//                    this.name = name;
+//                    this.surname = surname;
+//                    this.age = age;
+//                  }
+//                  
+//                  sayHi() {
+//                    alert(this.name);
+//                }
+//            }
+//            
+//            class User extends Human{
+//
+//                constructor(name) {
+//                    super(name,null,null);
+//                }
+//            }
+//            
+//            
+//            var user = new User("Sarkhan");
+//            user.sayHi();
+//            
+            
+            Human.prototype = {
+                schoolName: "",
+                salary:0
+            }
+            
+            function Human(){
+                    console.log("Human constructor");
+            }
+            
+            function Human(name, surname, age){
+                    console.log("Human constructor with params");
+                    this.name = name;
+                    this.surname = surname;
+                    this.age = age;
+            }
+            
+           
+            User.prototype = Object.create(Human.prototype);
+            
+            function User(){
+                  console.log("User constructor");
+            }
+            
+            function User(userCustom){
+                console.log("User constructor with params");
+                this.userCustom = userCustom;
+            }
+            
+            var user = new User("user custom stuff");
+            console.log("user is Human?="+(user instanceof Human));
+            user.schoolName = "sarkhanrasullu.com";
+            
+            console.log(user.schoolName);
+            console.log(user.userCustom);
+            
+            
+//            var obj = {// javascript object notation
+//                name: "",
+//                surname: "",
+//                age: 0,
+//                myFunk: function () {
+//                    console.log("I am doing something");
+//                }
+//            };
+//
+//            var myArr = [];
+//
+////            var myArr = {
+////                arr:[
+////                "Sarkhan",
+////                "Tabriz",
+////                "Rafael"
+////                ],
+////                length:2,
+////                alma: "as"
+////            };
+//
+//            myArr[0] = "Sarkhan";
+//            myArr[1] = "Tabriz";
+//            myArr[2] = "Rafael";
+//
+//            obj.myFunk();
+//
+//            obj.name = "Sarkhan";
+//            obj.surname = "Rasullu";
+//            obj.surname = 22;
+//            obj.surname = function () {
+//                console.log("asdjnsad");
+//            };
+//            obj.age = 25;
+//            obj.mySecondFunk =
+//                    console.log(obj);
+//
+//            var arr = [];//
+//
+//            arr[0] = "Sarkhan";
+//            arr[1] = "Rafel";
+//            arr[2] = "Tabriz";
+//            arr["name"] = "Test";
+//            console.log(arr["name"]);
+//
+//            for (var i = 0; i < arr.length; i++) {
+//                console.log(arr[i]);
+//            }
+
+
+            function changeMyTextArea(sourceId, destinationId) {
+                var myTextFieldElem = document.getElementById(sourceId);
+                var myTextAreaElem = document.getElementById(destinationId);
+
+                myTextAreaElem.innerHTML = myTextFieldElem.value;
+
+
+                var varNameElem = document.getElementById("varName");
+                obj[varNameElem.value] = myTextFieldElem.value;
+
+                console.log(obj);
+            }
+
+
+
+
+            function clickOnMe() {
+                setTimeout(function () {
+                    alert("You clicked on me");
+                }, 3000);//1000
+            }
+
+            function showMe() {
+                var varNameElem = document.getElementById("varName");
+                alert(obj[varNameElem.value]);
+            }
+
+        </script>
     </head>
-    <body bgcolor="red">
-         <form method="GET" action="index.html">
-                <input type="text" name="surname" placeholder="surname"/>
-                <input type="text" name="age" placeholder="age"/>
-                <input type="password" name="password" placeholder="password"/>
-             
-             <input type="submit" value="OK"/>
-         </form>
+    <body>
+        <button onclick="clickOnMe()" >click on me</button>
+        variable name:
+        <input type="text" id="varName" />
+        <button onclick="showMe()" >showMe</button>
+        type here:
+        <input type="text" id="myTextField"  onkeyup="changeMyTextArea('myTextField', 'myTextArea')"/>
+        <br>
+        <br>
+        Your text:
+        <span id="myTextArea" >
+
+        </span>
+
+
+        <!--        <div class="row">
+                    <form class="col-md-3">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="surname">Surname</label>
+                            <input type="text" class="form-control" placeholder="surname" name="surname">
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" class="form-control" name="age">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>name</th>
+                            <th>surname</th>
+                            <th>age</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                1    
+                            </td>
+                            <td>
+                                Sarkhan
+                            </td>
+                            <td> 
+                                Rasullu
+                            </td>
+                            <td>
+                                25
+                            </td>
+                            <td>
+                                <input type="submit" value="edit" class="btn btn-warning"/>
+                                <input type="submit" value="delete" class="btn btn-danger"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2   
+                            </td>
+                            <td>
+                                Fikret
+                            </td>
+                            <td> 
+                                Ehmedov
+                            </td>
+                            <td>
+                                26
+                            </td>
+                            <td>
+                                <input type="submit" value="edit" class="btn btn-warning"/>
+                                <input type="submit" value="delete" class="btn btn-danger"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+        -->
+
     </body>
+
 </html>
